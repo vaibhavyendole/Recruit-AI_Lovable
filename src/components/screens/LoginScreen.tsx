@@ -17,9 +17,9 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
   return (
     <div className="min-h-screen flex">
       {/* Left Section - Illustration */}
-      <div className="hidden lg:flex lg:w-1/2 gradient-hero items-center justify-center p-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(199,89%,48%,0.15),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(173,80%,40%,0.1),transparent_50%)]" />
+      <div className="hidden lg:flex lg:w-1/2 bg-[hsl(199,70%,95%)] items-center justify-center p-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(199,89%,70%,0.3),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(199,80%,80%,0.4),transparent_50%)]" />
         
         <div className="relative z-10 max-w-lg text-center animate-fade-in">
           <img 
@@ -27,10 +27,10 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
             alt="AI Recruitment Assistant" 
             className="w-full max-w-md mx-auto mb-8 animate-float"
           />
-          <h2 className="text-3xl font-bold text-primary-foreground mb-4">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
             AI-Powered Recruitment
           </h2>
-          <p className="text-primary-foreground/80 text-lg">
+          <p className="text-muted-foreground text-lg">
             Screen candidates 10x faster with intelligent automation. 
             Upload job descriptions, bulk process resumes, and let AI handle the heavy lifting.
           </p>
