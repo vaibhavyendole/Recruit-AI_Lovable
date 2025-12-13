@@ -110,19 +110,18 @@ export function DashboardScreen({ onCreateJob, onOpenJob }: DashboardScreenProps
       <main className="container mx-auto px-6 py-8">
         {/* Hero Section */}
         <div className="mb-8 animate-fade-in">
-          <Card variant="gradient" className="p-8 gradient-hero text-primary-foreground relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(199,89%,48%,0.2),transparent_50%)]" />
+          <Card variant="gradient" className="p-8 bg-[hsl(199,70%,95%)] relative overflow-hidden border-[hsl(199,60%,85%)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(199,70%,88%),transparent_50%)]" />
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-2">Welcome back, Sarah!</h1>
-                <p className="text-primary-foreground/80 text-lg max-w-md">
+                <h1 className="text-3xl font-bold mb-2 text-foreground">Welcome back, Sarah!</h1>
+                <p className="text-muted-foreground text-lg max-w-md">
                   Upload a job description or paste text; AI will automatically generate screening criteria.
                 </p>
               </div>
               <Button 
-                variant="glass" 
+                variant="default" 
                 size="xl"
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20"
                 onClick={onCreateJob}
               >
                 <Plus className="mr-2 h-5 w-5" />
