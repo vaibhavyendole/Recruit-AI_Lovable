@@ -53,6 +53,38 @@ export function ShortlistScreen({ onBack, onViewCandidate, onStartScreening }: S
     c.currentRole.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleExportCSV = () => {
+    const headers = ['Name', 'Email', 'Current Role', 'Company', 'Location', 'Experience (Years)', 'Match Score', 'Status', 'Matched Skills', 'Missing Skills', 'AI Reasoning'];
+    
+    const csvData = filteredCandidates
+      .sort((a, b) => b.matchScore - a.matchScore)
+      .map(candidate => [
+        candidate.name,
+        candidate.email,
+        candidate.currentRole,
+        candidate.company,
+        candidate.location,
+        candidate.experience,
+        candidate.matchScore,
+        candidate.status,
+        candidate.matchedSkills.join('; '),
+        candidate.missingSkills.join('; '),
+        candidate.reasoning
+      ]);
+    
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `shortlist-candidates-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -70,7 +102,7 @@ export function ShortlistScreen({ onBack, onViewCandidate, onStartScreening }: S
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handleExportCSV}>
               <Download className="mr-2 h-4 w-4" />
               Export CSV
             </Button>
