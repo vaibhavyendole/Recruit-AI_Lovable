@@ -28,6 +28,7 @@ import { Input } from '@/components/ui/input';
 interface DashboardScreenProps {
   onCreateJob: () => void;
   onOpenJob: (jobId: string) => void;
+  onSignOut?: () => void;
 }
 
 function getStatusBadge(status: Job['status']) {
@@ -47,7 +48,7 @@ function getStatusBadge(status: Job['status']) {
   }
 }
 
-export function DashboardScreen({ onCreateJob, onOpenJob }: DashboardScreenProps) {
+export function DashboardScreen({ onCreateJob, onOpenJob, onSignOut }: DashboardScreenProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Top Navigation */}
@@ -97,7 +98,7 @@ export function DashboardScreen({ onCreateJob, onOpenJob }: DashboardScreenProps
                 <DropdownMenuItem>
                   <Settings className="mr-2 h-4 w-4" /> Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive">
+                <DropdownMenuItem className="text-destructive" onClick={onSignOut}>
                   Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
