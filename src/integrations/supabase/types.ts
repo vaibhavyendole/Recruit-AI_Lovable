@@ -14,7 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      candidates: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          experience: number | null
+          id: string
+          interview_scheduled_at: string | null
+          job_id: string
+          location: string | null
+          match_score: number | null
+          matched_skills: string[] | null
+          missing_skills: string[] | null
+          name: string
+          phone: string | null
+          reasoning: string | null
+          resume_text: string | null
+          resume_url: string | null
+          role_title: string | null
+          screening_notes: string | null
+          skills: string[] | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          experience?: number | null
+          id?: string
+          interview_scheduled_at?: string | null
+          job_id: string
+          location?: string | null
+          match_score?: number | null
+          matched_skills?: string[] | null
+          missing_skills?: string[] | null
+          name: string
+          phone?: string | null
+          reasoning?: string | null
+          resume_text?: string | null
+          resume_url?: string | null
+          role_title?: string | null
+          screening_notes?: string | null
+          skills?: string[] | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          experience?: number | null
+          id?: string
+          interview_scheduled_at?: string | null
+          job_id?: string
+          location?: string | null
+          match_score?: number | null
+          matched_skills?: string[] | null
+          missing_skills?: string[] | null
+          name?: string
+          phone?: string | null
+          reasoning?: string | null
+          resume_text?: string | null
+          resume_url?: string | null
+          role_title?: string | null
+          screening_notes?: string | null
+          skills?: string[] | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidates_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          created_at: string
+          description: string | null
+          experience_max: number | null
+          experience_min: number | null
+          id: string
+          job_type: string | null
+          location: string | null
+          preferred_skills: string[] | null
+          required_skills: string[] | null
+          responsibilities: string[] | null
+          status: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          experience_max?: number | null
+          experience_min?: number | null
+          id?: string
+          job_type?: string | null
+          location?: string | null
+          preferred_skills?: string[] | null
+          required_skills?: string[] | null
+          responsibilities?: string[] | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          experience_max?: number | null
+          experience_min?: number | null
+          id?: string
+          job_type?: string | null
+          location?: string | null
+          preferred_skills?: string[] | null
+          required_skills?: string[] | null
+          responsibilities?: string[] | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

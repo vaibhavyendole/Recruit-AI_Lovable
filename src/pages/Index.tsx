@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppStep } from '@/types/recruit';
-import { LoginScreen } from '@/components/screens/LoginScreen';
+import { useAuth } from '@/hooks/useAuth';
 import { DashboardScreen } from '@/components/screens/DashboardScreen';
 import { CreateJobScreen } from '@/components/screens/CreateJobScreen';
 import { ResumeUploadScreen } from '@/components/screens/ResumeUploadScreen';
@@ -9,20 +10,40 @@ import { CandidateProfileScreen } from '@/components/screens/CandidateProfileScr
 import { ScreeningChatScreen } from '@/components/screens/ScreeningChatScreen';
 import { SchedulingScreen } from '@/components/screens/SchedulingScreen';
 import { SummaryScreen } from '@/components/screens/SummaryScreen';
+import { Loader2 } from 'lucide-react';
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<AppStep>('login');
+  const { user, loading, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState<Exclude<AppStep, 'login'>>('dashboard');
   const [selectedCandidateId, setSelectedCandidateId] = useState<string>('1');
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   const renderScreen = () => {
     switch (currentStep) {
-      case 'login':
-        return <LoginScreen onLogin={() => setCurrentStep('dashboard')} />;
       case 'dashboard':
         return (
           <DashboardScreen 
             onCreateJob={() => setCurrentStep('create-job')}
             onOpenJob={() => setCurrentStep('shortlist')}
+            onSignOut={signOut}
           />
         );
       case 'create-job':
@@ -75,7 +96,13 @@ const Index = () => {
       case 'summary':
         return <SummaryScreen onBackToDashboard={() => setCurrentStep('dashboard')} />;
       default:
-        return <LoginScreen onLogin={() => setCurrentStep('dashboard')} />;
+        return (
+          <DashboardScreen 
+            onCreateJob={() => setCurrentStep('create-job')}
+            onOpenJob={() => setCurrentStep('shortlist')}
+            onSignOut={signOut}
+          />
+        );
     }
   };
 
